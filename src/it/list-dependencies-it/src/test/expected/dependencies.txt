@@ -1,0 +1,4 @@
+Version 1.0
+Columns: GroupId:ArtifactId:Version:Classifier:Type;Scope
+org.apache.maven:maven-core:3.2.3::jar;compile
+junit:junit:4.11::jar;test

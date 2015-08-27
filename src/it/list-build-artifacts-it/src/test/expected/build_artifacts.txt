@@ -1,0 +1,4 @@
+Version 1.0
+Columns: GroupId;ArtifactId;Version;Classifier;Type
+org.jboss.it:simple-it:1.0-SNAPSHOT::jar
+org.jboss.it:simple-it:1.0-SNAPSHOT:sources:java-source
