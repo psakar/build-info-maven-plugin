@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+    <components>
+
+	<component>
+		<role>org.jboss.mavenPlugin.buildInfo.ModuleResultsCollector</role>
+		<role-hint/>
+		<implementation>org.jboss.mavenPlugin.buildInfo.ModuleResultsCollectorImpl
+		</implementation>
+			<!-- 
+		<isolated-realm>false</isolated-realm>
+		<requirements>
+			<requirement>
+				<role>org.codehaus.plexus.logging.Logger</role>
+				<role-hint />
+				<field-name>logger</field-name>
+			</requirement>
+			<requirement>
+				<role>org.apache.maven.eventspy.EventSpy</role>
+				<field-name>eventSpies</field-name>
+			</requirement>
+		</requirements>
+			 -->
+	</component>
+<!-- 
+        <component>
+            <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+            <role-hint>zip</role-hint>
+            <implementation>
+                org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping
+            </implementation>
+            <configuration>
+                <phases>
+                    <package>
+                    	org.sonatype.mavenbook.plugins:maven-zip-plugin:echo
+                    </package>
+                </phases>
+            </configuration>
+        </component>
+ -->    
+    </components>
+</component-set>

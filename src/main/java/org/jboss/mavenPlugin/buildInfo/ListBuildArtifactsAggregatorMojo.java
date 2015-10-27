@@ -1,37 +1,27 @@
 package org.jboss.mavenPlugin.buildInfo;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.InstantiationStrategy;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-@Mojo(name = "list-build-artifacts", defaultPhase = LifecyclePhase.PACKAGE) //, instantiationStrategy = InstantiationStrategy.SINGLETON
-public class ListBuildArtifactsMojo extends AbstractParentMojo {
+@Mojo(name = "list-build-artifacts-aggregator", defaultPhase = LifecyclePhase.PACKAGE, instantiationStrategy = InstantiationStrategy.SINGLETON, aggregator = true)
+public class ListBuildArtifactsAggregatorMojo extends AbstractParentMojo {
 
 	/**
 	 * Location of the output file.
 	 */
-	@Parameter(defaultValue = "${project.build.directory}/build_artifacts.txt", property = "outputFile", required = false)
+	@Parameter(defaultValue = "${project.build.directory}/build_artifacts_all.txt", property = "outputFile", required = false)
 	private File outputFile;
 
 	public void execute() throws MojoExecutionException {
-		List<Artifact> buildArtifacts = createListOfBuildArtifacts();
-		collector.addModuleBuildArtifacts(createProjectId(project), buildArtifacts);
-		createOuputFile(buildArtifacts);
+		createOuputFile(collector.createListOfBuildArtifacts(getExcludedModules()));
 	}
-
-	private List<Artifact> createListOfBuildArtifacts() {
-		List<Artifact> artifacts = new ArrayList<>();
-		artifacts.add(project.getArtifact());
-		artifacts.addAll(project.getAttachedArtifacts());
-		return artifacts;
-	}
-
 
 	private void createOuputFile(List<Artifact> artifacts) throws MojoExecutionException {
 		Result<List<Artifact>> result = new Result<>(project, artifacts);
@@ -41,5 +31,5 @@ public class ListBuildArtifactsMojo extends AbstractParentMojo {
 			new ArtifactsToFileWriter(outputFile).write(result);
 		}
 	}
-
+	
 }

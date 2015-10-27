@@ -6,6 +6,7 @@
 	<groupId>org.jboss.it</groupId>
 	<artifactId>simple-it</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<description>A simple IT verifying the basic use case.</description>
 
@@ -13,31 +14,44 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<modules>
+		<module>moduleA</module>
+		<module>moduleB</module>
+		<module>moduleC</module>
+	</modules>
+
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>@project.groupId@</groupId>
 				<artifactId>@project.artifactId@</artifactId>
 				<version>@project.version@</version>
 				<executions>
 					<execution>
+						<id>list-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>list-dependencies</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>list-build-artifacts</id>
 						<phase>package</phase>
 						<goals>
 							<goal>list-build-artifacts</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>list-external-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>list-external-dependencies-aggregator</goal>
+						</goals>
+						<configuration>
+							<excludeModules>unknownModule, 
+							org.jboss.it:simple-it-c
+							</excludeModules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

@@ -2,5 +2,6 @@ Version	1.0
 Project	org.jboss.it:simple-it:1.0-SNAPSHOT
 Dependencies
 GAV(GroupId:ArtifactId:Version:Classifier:Type)	Scope
-org.apache.maven:maven-core:3.2.3::jar	compile
 junit:junit:4.11::jar	test
+org.apache.maven:maven-aether-provider:3.2.3::jar	compile
+org.apache.maven:maven-core:3.2.3::jar	compile
